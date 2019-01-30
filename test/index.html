@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="text">0</div>
+  <button>测试点击</button>
+</body>
+<script>
+window.exports = {}
+</script>
+<script src="../sdk/dist/index.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const $text = document.querySelector('#text')
+  const $btn = document.querySelector('button')
+  $btn.addEventListener('click', () => {
+    $text.innerHTML = +$text.innerHTML + 1;
+    es.track('click', { text: $text.innerHTML, time: +new Date() }, '点击按钮')
+  })
+
+  es.setUserInfo('243', '张三', { gender: 1 })
+  es.init('http://192.168.31.105:3333/api/v1/web.gif', {
+    deviceId: '123'
+  })
+})
+</script>
+</html>

@@ -1,0 +1,18 @@
+{
+  "name": "electron-statistics",
+  "version": "0.0.1",
+  "scripts": {
+    "build:sdk": "rollup sdk/src/index.js -o sdk/dist/index.js -f umd -n es",
+    "serve": "http-server ./",
+    "server": "nodemon --watch server server/index.js"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.15.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "rollup": "^1.1.2"
+  }
+}
