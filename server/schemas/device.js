@@ -10,6 +10,4 @@ const DeviceSchema = new mongoose.Schema({
   }
 }, { timestamps: true })
 
-const Device = mongoose.model('device', DeviceSchema)
-
-module.exports = Device
+module.exports = mongoose.model('device', DeviceSchema)

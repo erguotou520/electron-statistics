@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "fastify": "^1.13.4",
+    "fastify-jwt": "^0.9.1",
     "fastify-plugin": "^1.4.0",
     "mongoose": "^5.4.7"
   }

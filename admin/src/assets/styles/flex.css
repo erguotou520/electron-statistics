@@ -1,0 +1,85 @@
+.flex {
+  display: flex;
+}
+.flex-inline {
+  display: inline-flex;
+}
+.flex-column {
+  @inherit: .flex;
+  flex-direction: column;
+}
+.flex-row {
+  @inherit: .flex;
+  flex-direction: row;
+}
+.flex-ai-start {
+  @inherit: .flex;
+  align-items: flex-start;
+}
+.flex-ai-center {
+  @inherit: .flex;
+  align-items: center;
+}
+.flex-ai-end {
+  @inherit: .flex;
+  align-items: flex-end;
+}
+.flex-jc-start {
+  @inherit: .flex;
+  justify-content: flex-start;
+}
+.flex-jc-center {
+  @inherit: .flex;
+  justify-content: center;
+}
+.flex-jc-end {
+  @inherit: .flex;
+  justify-content: flex-end;
+}
+.flex-ai-jc-center {
+  @inherit: .flex-ai-center;
+  justify-content: center;
+}
+.flex-column-ai-jc-center {
+  @inherit: .flex-ai-jc-center;
+  flex-direction: column;
+}
+.flex-column-center {
+  @inherit: .flex-column;
+  align-items: center;
+}
+.flex-column-jc-center {
+  @inherit: .flex-column;
+  justify-content: center;
+}
+.flex-column-ai-center {
+  @inherit: .flex-column;
+  align-items: center;
+}
+.flex-jc-between {
+  @inherit: .flex;
+  justify-content: space-between;
+}
+.flex-jc-around {
+  @inherit: .flex;
+  justify-content: space-around;
+}
+.flex-inline-ai-center {
+  @inherit: .flex-inline;
+  align-items: center;
+}
+.flex-inline-ai-jc-center {
+  @inherit: .flex-inline-ai-center;
+  justify-content: center;
+}
+
+.flex-1 {
+  flex: 1;
+}
+.no-shrink {
+  flex-shrink: 0;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}

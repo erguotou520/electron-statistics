@@ -27,6 +27,4 @@ const OnlineSchema = new mongoose.Schema({
   }
 })
 
-const Online = mongoose.model('online', OnlineSchema)
-
-module.exports = Online
+module.exports = mongoose.model('online', OnlineSchema)
