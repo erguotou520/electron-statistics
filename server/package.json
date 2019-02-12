@@ -1,8 +1,14 @@
 {
+  "scripts": {
+    "server": "nodemon --watch ./ index.js"
+  },
   "dependencies": {
     "fastify": "^1.13.4",
+    "fastify-cors": "^1.0.0",
     "fastify-jwt": "^0.9.1",
     "fastify-plugin": "^1.4.0",
+    "ip2region": "^1.6.0",
+    "lodash.omit": "^4.5.0",
     "mongoose": "^5.4.7"
   }
 }

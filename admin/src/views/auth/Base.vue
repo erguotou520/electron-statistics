@@ -26,7 +26,7 @@ export default {
 <style lang="postcss">
 .v-auth {
   height: 100%;
-  padding-top: 20%;
+  padding-top: 20vh;
   padding-bottom: 24px;
   background: var(--darkBg);
   color: #fff;

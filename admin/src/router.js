@@ -1,9 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from './store'
+import Base from './views/main/Base.vue'
 import Overview from './views/main/Overview.vue'
 
 Vue.use(Router)
+
+const Only = {
+  render: h => h('router-view')
+}
 
 export const menus = [
   {
@@ -11,14 +16,20 @@ export const menus = [
     name: 'overview',
     component: Overview,
     meta: {
-      name: '概览'
+      name: '概览',
+      icon: 'dashboard'
     }
   },
   {
-    path: '/users',
+    path: 'users',
+    component: Only,
+    meta: {
+      name: '用户管理',
+      icon: 'user'
+    },
     children: [
       {
-        path: '/new',
+        path: 'new',
         name: 'new-users',
         component: () => import('./views/users/New.vue'),
         meta: {
@@ -26,7 +37,7 @@ export const menus = [
         }
       },
       {
-        path: '/active',
+        path: 'active',
         name: 'active-users',
         component: () => import('./views/users/Active.vue'),
         meta: {
@@ -34,7 +45,7 @@ export const menus = [
         }
       },
       {
-        path: '/new-retain',
+        path: 'new-retain',
         name: 'new-retains',
         component: () => import('./views/users/NewRetain.vue'),
         meta: {
@@ -42,7 +53,7 @@ export const menus = [
         }
       },
       {
-        path: '/active-retain',
+        path: 'active-retain',
         name: 'active-retains',
         component: () => import('./views/users/ActiveRetain.vue'),
         meta: {
@@ -50,7 +61,7 @@ export const menus = [
         }
       },
       {
-        path: '/duration',
+        path: 'duration',
         name: 'durations',
         component: () => import('./views/users/Duration.vue'),
         meta: {
@@ -60,10 +71,15 @@ export const menus = [
     ]
   },
   {
-    path: '/devices',
+    path: 'devices',
+    component: Only,
+    meta: {
+      name: '设备管理',
+      icon: 'windows'
+    },
     children: [
       {
-        path: '/launch',
+        path: 'launch',
         name: 'launch-count',
         component: () => import('./views/devices/Launch.vue'),
         meta: {
@@ -73,10 +89,15 @@ export const menus = [
     ]
   },
   {
-    path: '/distribution',
+    path: 'distribution',
+    component: Only,
+    meta: {
+      name: '分布管理',
+      icon: 'pie-chart'
+    },
     children: [
       {
-        path: '/ip',
+        path: 'ip',
         name: 'ip-distribution',
         component: () => import('./views/distribution/Ip.vue'),
         meta: {
@@ -84,7 +105,7 @@ export const menus = [
         }
       },
       {
-        path: '/gender',
+        path: 'gender',
         name: 'gender-distribution',
         component: () => import('./views/distribution/Gender.vue'),
         meta: {
@@ -92,7 +113,7 @@ export const menus = [
         }
       },
       {
-        path: '/age',
+        path: 'age',
         name: 'age-distribution',
         component: () => import('./views/distribution/Age.vue'),
         meta: {
@@ -105,13 +126,12 @@ export const menus = [
 
 const router = new Router({
   routes: [
-    ...menus,
     {
-      path: '/auth',
+      path: 'auth',
       component: () => import('./views/auth/Base.vue'),
       children: [
         {
-          path: '/login',
+          path: 'login',
           name: 'login',
           component: () => import('./views/auth/Login.vue'),
           meta: {
@@ -121,10 +141,15 @@ const router = new Router({
       ]
     },
     {
+      path: '/',
+      component: Base,
+      children: menus
+    },
+    {
       path: '/error',
       children: [
         {
-          path: '/404',
+          path: '404',
           component: () => import('./views/error/404.vue'),
           meta: {
             skipAuth: true

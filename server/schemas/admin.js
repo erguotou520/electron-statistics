@@ -33,6 +33,7 @@ AdminSchema
   .virtual('profile')
   .get(function () {
     return {
+      id: this._id,
       name: this.name,
       role: this.role,
       avatar: this.avatar
@@ -70,16 +71,10 @@ AdminSchema
 // Validate username is not taken
 AdminSchema
   .path('username')
-  .validate(function (value, respond) {
-    var self = this
-    this.constructor.findOne({ username: value }, function (err, user) {
-      if (err) throw err
-      if (user) {
-        if (self.id === user.id) return respond(true)
-        return respond(false)
-      }
-      respond(true)
-    })
+  .validate(async function (value) {
+    const admin = await this.constructor.findOne({ username: value })
+    if (admin && this.id === admin.id) return true
+    return !admin
   }, 'The specified username is already in use.')
 
 var validatePresenceOf = function (value) {

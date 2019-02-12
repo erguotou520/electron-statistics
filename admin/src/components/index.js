@@ -17,7 +17,9 @@ import {
   Modal,
   Skeleton,
   Spin,
-  Divider
+  Divider,
+  Layout,
+  message
 } from 'ant-design-vue'
 
 const components = {
@@ -38,9 +40,12 @@ const components = {
   Modal,
   Skeleton,
   Spin,
-  Divider
+  Divider,
+  Layout
 }
 
 Object.keys(components).forEach(key => {
   Vue.use(components[key])
 })
+
+Vue.prototype.$message = message

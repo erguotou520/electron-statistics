@@ -9,9 +9,9 @@ const OnlineSchema = new mongoose.Schema({
   userId: {
     type: String
   },
-  // 时间段
+  // 时间段开始时间，一天可能会有多个ip记录
   time: {
-    type: Number
+    type: Date
   },
   // 这段时间的在线时长，单位秒
   duration: {
@@ -19,6 +19,14 @@ const OnlineSchema = new mongoose.Schema({
   },
   // ip
   ip: {
+    type: String
+  },
+  // ip对应的省份
+  province: {
+    type: String
+  },
+  // ip对应的城市
+  city: {
     type: String
   },
   // 上一次更新时间

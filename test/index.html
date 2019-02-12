@@ -23,10 +23,15 @@ document.addEventListener('DOMContentLoaded', () => {
     es.track('click', { text: $text.innerHTML, time: +new Date() }, '点击按钮')
   })
 
-  es.setUserInfo('243', '张三', { gender: 1 })
   es.init('http://192.168.31.105:3333/api/v1/web.gif', {
-    deviceId: '123'
+    deviceId: '123',
+    user: {
+      id: '243',
+      name: '张三',
+      gender: 1
+    }
   })
+  // es.setUserInfo('243', '张三', { gender: 1 })
 })
 </script>
 </html>

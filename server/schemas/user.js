@@ -17,6 +17,14 @@ const UserSchema = new mongoose.Schema({
   gender: {
     // 1 男 2 女 3其它
     type: Number
+  },
+  // 出生年
+  birthyear: {
+    type: Number
+  },
+  // 其它额外属性
+  extra: {
+    type: Object
   }
 }, { timestamps: true })
 

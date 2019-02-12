@@ -8,9 +8,9 @@ function signUser (fastify, user) {
 module.exports = (fastify) => {
   fastify.register(require('fastify-jwt'), { secret })
 
-  fastify.addHook('onRequest', async (request, reply) => {
+  fastify.addHook('preHandler', async (request, reply) => {
     try {
-      if (!request.url.endsWith('/login')) {
+      if (!request.req.url.match(/api\/v\d+(\/login$|\/web.gif)/)) {
         await request.jwtVerify()
       }
     } catch (err) {
@@ -18,10 +18,26 @@ module.exports = (fastify) => {
     }
   })
 
-  fastify.post('/login', async (req, reply) => {
-    const { username, password } = req
+  // login
+  fastify.post('/login', {
+    schema: {
+      body: {
+        type: 'object',
+        properties: {
+          username: {
+            type: 'string'
+          },
+          password: {
+            type: 'string'
+          }
+        },
+        required: ['username', 'password']
+      }
+    }
+  }, async (req, reply) => {
+    const { username, password } = req.body
     try {
-      const admin = await Admin.findOne({ username: username.toLowerCase() })
+      const admin = await Admin.findOne({ username })
       if (!admin) {
         reply.code(400).send({ message: '账号或密码不正确' })
       } else {
@@ -33,7 +49,43 @@ module.exports = (fastify) => {
         }
       }
     } catch (error) {
-      reply.code(500).send({ message: error })
+      reply.code(500).send({ message: error.message || error })
+    }
+  })
+
+  // update password
+  fastify.put('/updatePwd', {
+    schema: {
+      body: {
+        type: 'object',
+        properties: {
+          oldPassword: {
+            type: 'string'
+          },
+          newPassword: {
+            type: 'string'
+          }
+        },
+        required: ['oldPassword', 'newPassword']
+      }
+    }
+  }, async (req, reply) => {
+    const { oldPassword, newPassword } = req.body
+    try {
+      const admin = await Admin.findOne({ _id: req.user.id })
+      if (!admin) {
+        reply.code(500).send({ message: '没有找到用户' })
+      } else {
+        if (!admin.authenticate(oldPassword)) {
+          reply.code(403).send({ message: '旧密码不正确' })
+        } else {
+          admin.password = newPassword
+          await admin.save()
+          reply.send({})
+        }
+      }
+    } catch (error) {
+      reply.code(500).send({ message: error.message || error })
     }
   })
 }

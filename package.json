@@ -2,7 +2,8 @@
   "name": "electron-statistics",
   "version": "0.0.1",
   "scripts": {
-    "build:sdk": "rollup sdk/src/index.js -o sdk/dist/index.js -f umd -n es",
+    "build:sdk": "rollup sdk/src/index.js -w sdk/src/index.js -o sdk/dist/index.js -f umd -n es",
+    "admin": "cd admin && yarn serve",
     "serve": "http-server ./",
     "server": "nodemon --watch server server/index.js"
   },

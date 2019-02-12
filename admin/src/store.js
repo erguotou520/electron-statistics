@@ -5,36 +5,37 @@ Vue.use(Vuex)
 
 const USER_STORE = 'session.user'
 
+let stored = localStorage.getItem(USER_STORE)
+if (stored) {
+  try {
+    stored = JSON.parse(stored)
+  } catch (error) {}
+}
+
 export default new Vuex.Store({
   state: {
-    user: {}
+    user: stored ? stored.user : {},
+    token: stored ? stored.token : ''
   },
   mutations: {
-    UPDATE_USER (state, newUser) {
-      state.user = newUser
+    UPDATE_USER (state, { user, token }) {
+      state.user = user
+      state.token = token
     }
   },
   actions: {
-    initUser ({ commit }) {
-      const stored = localStorage.getItem(USER_STORE)
-      if (stored) {
-        try {
-          const user = JSON.parse(stored)
-          commit('UPDATE_USER', user)
-        } catch (error) {}
-      }
-    },
-    setUser ({ commit }, newUser) {
-      commit('UPDATE_USER', newUser)
-      localStorage.setItem(USER_STORE, newUser)
+    setUser ({ commit }, { user, token }) {
+      commit('UPDATE_USER', { user, token })
+      localStorage.setItem(USER_STORE, JSON.stringify({ user, token }))
     },
     logout ({ commit }) {
-      commit('UPDATE_USER', {})
+      commit('UPDATE_USER', { user: {}, token: '' })
       localStorage.removeItem(USER_STORE)
     }
   },
   getters: {
     user: state => state.user,
-    isLoggedIn: state => !!state.user.id
+    token: state => state.token,
+    isLoggedIn: state => !!state.user.name
   }
 })

@@ -152,6 +152,13 @@ fastfall@^1.5.0:
   dependencies:
     reusify "^1.0.0"
 
+fastify-cors@^1.0.0:
+  version "1.0.0"
+  resolved "http://registry.npm.taobao.org/fastify-cors/download/fastify-cors-1.0.0.tgz#a2864274ee9d7699f47f9ad8a5b4a736effc7b16"
+  dependencies:
+    fastify-plugin "^1.2.0"
+    vary "^1.1.2"
+
 fastify-jwt@^0.9.1:
   version "0.9.1"
   resolved "http://registry.npm.taobao.org/fastify-jwt/download/fastify-jwt-0.9.1.tgz#77fa5c5bd14cb22c8e5f778021e8445b9aa5f10c"
@@ -239,6 +246,10 @@ inherits@2.0.3, inherits@^2.0.3, inherits@~2.0.3:
   version "2.0.3"
   resolved "http://registry.npm.taobao.org/inherits/download/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
 
+ip2region@^1.6.0:
+  version "1.6.0"
+  resolved "http://registry.npm.taobao.org/ip2region/download/ip2region-1.6.0.tgz#b64861ca2b03480ce205b5a5cd7e0f7e4e9b87d7"
+
 ipaddr.js@1.8.0:
   version "1.8.0"
   resolved "http://registry.npm.taobao.org/ipaddr.js/download/ipaddr.js-1.8.0.tgz#eaa33d6ddd7ace8f7f6fe0c9ca0440e706738b1e"
@@ -314,6 +325,10 @@ lodash.isplainobject@^4.0.6:
 lodash.isstring@^4.0.1:
   version "4.0.1"
   resolved "http://registry.npm.taobao.org/lodash.isstring/download/lodash.isstring-4.0.1.tgz#d527dfb5456eca7cc9bb95d5daeaf88ba54a5451"
+
+lodash.omit@^4.5.0:
+  version "4.5.0"
+  resolved "http://registry.npm.taobao.org/lodash.omit/download/lodash.omit-4.5.0.tgz#6eb19ae5a1ee1dd9df0b969e66ce0b7fa30b5e60"
 
 lodash.once@^4.0.0:
   version "4.1.1"
@@ -592,6 +607,10 @@ uri-js@^4.2.2:
 util-deprecate@^1.0.1, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "http://registry.npm.taobao.org/util-deprecate/download/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
+
+vary@^1.1.2:
+  version "1.1.2"
+  resolved "http://registry.npm.taobao.org/vary/download/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
 
 wrappy@1:
   version "1.0.2"

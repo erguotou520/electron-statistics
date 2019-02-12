@@ -2,7 +2,7 @@
   <a-form :form="form" ref="form" @submit="login">
     <a-form-item>
       <a-input
-        autofocus
+        autoFocus
         placeholder="请输入用户名"
         v-decorator="[
           'username',
@@ -55,6 +55,3 @@ export default {
   }
 }
 </script>
-<style lang="postcss">
-
-</style>
