@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-table bordered
-      row-key="ageRange"
+      row-key="province"
       :columns="tableColumns"
       :data-source="data"
       :loading="loading"
@@ -16,10 +16,10 @@ export default {
       data: [],
       tableColumns: [
         {
-          title: '年龄段',
-          dataIndex: 'ageRange',
+          title: '城市',
+          dataIndex: 'province',
           width: '30%',
-          key: 'ageRange'
+          key: 'province'
         },
         {
           title: '占比',
@@ -33,7 +33,7 @@ export default {
   methods: {
     async fetch () {
       this.loading = true
-      const { data, error } = await this.$http.get('/distribution/age')
+      const { data, error } = await this.$http.get('/distribution/geo')
       if (!error) {
         this.data = data
       }

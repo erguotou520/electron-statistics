@@ -1,6 +1,10 @@
+const qs = require('qs')
 // Require the framework and instantiate it
 const fastify = require('fastify')({
-  logger: { level: 'info' }
+  logger: { level: 'info' },
+  querystringParser: str => {
+    return qs.parse(str)
+  }
 })
 const config = require('./config')
 

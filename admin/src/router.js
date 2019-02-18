@@ -7,7 +7,12 @@ import Overview from './views/main/Overview.vue'
 Vue.use(Router)
 
 const Only = {
-  render: h => h('router-view')
+  render: h => h('transition', {
+    props: {
+      name: 'router',
+      mode: 'out-in'
+    }
+  }, [h('router-view')])
 }
 
 export const menus = [
@@ -85,6 +90,14 @@ export const menus = [
         meta: {
           name: '启动次数'
         }
+      },
+      {
+        path: 'os',
+        name: 'os-percent',
+        component: () => import('./views/devices/Os.vue'),
+        meta: {
+          name: '操作系统'
+        }
       }
     ]
   },
@@ -97,9 +110,9 @@ export const menus = [
     },
     children: [
       {
-        path: 'ip',
-        name: 'ip-distribution',
-        component: () => import('./views/distribution/Ip.vue'),
+        path: 'geo',
+        name: 'geo-distribution',
+        component: () => import('./views/distribution/Geo.vue'),
         meta: {
           name: '地域分布'
         }
@@ -118,6 +131,24 @@ export const menus = [
         component: () => import('./views/distribution/Age.vue'),
         meta: {
           name: '年龄分布'
+        }
+      }
+    ]
+  },
+  {
+    path: 'event',
+    component: Only,
+    meta: {
+      name: '事件分析',
+      icon: 'code'
+    },
+    children: [
+      {
+        path: 'custom',
+        name: 'custom-event',
+        component: () => import('./views/event/Custom.vue'),
+        meta: {
+          name: '自定义事件'
         }
       }
     ]

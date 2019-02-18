@@ -1,5 +1,9 @@
 import Vue from 'vue'
+import moment from 'moment'
+import 'moment/locale/zh-cn'
+
 import {
+  LocaleProvider,
   Button,
   Icon,
   Row,
@@ -9,6 +13,7 @@ import {
   DatePicker,
   Form,
   Input,
+  Radio,
   Select,
   Avatar,
   Table,
@@ -23,6 +28,7 @@ import {
 } from 'ant-design-vue'
 
 const components = {
+  LocaleProvider,
   Button,
   Icon,
   Row,
@@ -32,6 +38,7 @@ const components = {
   DatePicker,
   Form,
   Input,
+  Radio,
   Select,
   Avatar,
   Table,
@@ -49,3 +56,5 @@ Object.keys(components).forEach(key => {
 })
 
 Vue.prototype.$message = message
+
+moment.locale('zh-cn')

@@ -20,15 +20,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const $btn = document.querySelector('button')
   $btn.addEventListener('click', () => {
     $text.innerHTML = +$text.innerHTML + 1;
-    es.track('click', { text: $text.innerHTML, time: +new Date() }, '点击按钮')
+    es.track('click1', { text: $text.innerHTML, time: +new Date() }, '点击按钮')
   })
 
   es.init('http://192.168.31.105:3333/api/v1/web.gif', {
-    deviceId: '123',
+    deviceId: '1234',
     user: {
-      id: '243',
+      id: '241',
       name: '张三',
-      gender: 1
+      gender: 1,
+      birthyear: 1992
     }
   })
   // es.setUserInfo('243', '张三', { gender: 1 })

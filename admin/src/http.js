@@ -1,10 +1,17 @@
 import axios from 'axios'
 import Vue from 'vue'
+import { stringify } from 'qs'
 import { message } from 'ant-design-vue'
 import store from './store'
+import router from './router'
 
 const instance = axios.create({
-  baseURL: 'http://192.168.31.105:3333/api/v1'
+  baseURL: 'http://192.168.31.105:3333/api/v1',
+  paramsSerializer: params => {
+    return stringify(params, {
+      arrayFormat: 'indices'
+    })
+  }
 })
 
 instance.interceptors.request.use(async config => {
@@ -18,9 +25,13 @@ instance.interceptors.request.use(async config => {
 })
 
 instance.interceptors.response.use(async function (res) {
-  return { data: res.data }
+  return { data: res.data, status: res.status }
 }, function (error) {
-  if (error.message && error.message.toLowerCase() === 'network error') {
+  if (error.response.status === 401) {
+    store.dispatch('logout')
+    router.replace({ name: 'login' })
+    message.error('请重新登录')
+  } else if (error.message && error.message.toLowerCase() === 'network error') {
     message.error('网络连接异常')
   } else if (error.code && error.code.toLowerCase && error.code.toLowerCase() === 'econnaborted') {
     message.error('网络连接超时')

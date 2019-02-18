@@ -3,12 +3,14 @@
     "server": "nodemon --watch ./ index.js"
   },
   "dependencies": {
-    "fastify": "^1.13.4",
-    "fastify-cors": "^1.0.0",
+    "dayjs": "^1.8.5",
+    "fastify": "^2.0.0-rc.6",
+    "fastify-cors": "2.x",
     "fastify-jwt": "^0.9.1",
     "fastify-plugin": "^1.4.0",
     "ip2region": "^1.6.0",
     "lodash.omit": "^4.5.0",
-    "mongoose": "^5.4.7"
+    "mongoose": "^5.4.7",
+    "qs": "^6.6.0"
   }
 }

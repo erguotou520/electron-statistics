@@ -117,8 +117,30 @@ function trackOnline (isFirst = false) {
   if (_user && isFirst) {
     data.user = _user
   }
+  const device = getDeviceInfo()
+  if (device) {
+    data.device = device
+  }
   track('_online', data)
   setTimeout(() => {
     trackOnline()
   }, 60000)
+}
+
+function getDeviceInfo () {
+  if (window.require) {
+    const os = window.require('os')
+    const { remote } = window.require('electron')
+    return {
+      os: os.platform(),
+      osRelease: os.release(),
+      appVersion: remote.app.getVersion()
+    }
+  } else {
+    return {
+      os: 'win32',
+      osRelease: '10.0.17134',
+      appVersion: '1.3.6'
+    }
+  }
 }

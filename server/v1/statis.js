@@ -1,6 +1,9 @@
+const dayjs = require('dayjs')
 const omit = require('lodash.omit')
 const IP2Region = require('ip2region')
+const Device = require('../schemas/device')
 const Online = require('../schemas/online')
+const Launch = require('../schemas/launch')
 const User = require('../schemas/user')
 const Event = require('../schemas/event')
 
@@ -47,14 +50,49 @@ async function _saveUser (user) {
   }
 }
 
+async function _saveDevice (deviceId, device) {
+  if (deviceId && device) {
+    const _device = await Device.findOne({ deviceId })
+    if (!_device) {
+      await Device.create({
+        deviceId,
+        ...device
+      })
+    }
+  }
+}
+
+async function _saveLaunch (deviceId) {
+  if (deviceId) {
+    const _launch = await Launch.findOne({
+      deviceId,
+      createdAt: {
+        $lt: dayjs().endOf('day').toDate(),
+        $gte: dayjs().startOf('day').toDate()
+      }
+    })
+    if (!_launch) {
+      await Launch.create({
+        deviceId,
+        count: 1
+      })
+    } else {
+      _launch.count++
+      await _launch.save()
+    }
+  }
+}
+
 async function handlerSetUser (data) {
   await _saveUser(data)
 }
 
 async function handlerOnline (data) {
   const now = new Date()
-  const validUpdateTime = new Date(now)
+  let validUpdateTime = new Date(now)
   validUpdateTime.setSeconds(validUpdateTime.getSeconds() - 90)
+  const todayStart = dayjs().startOf('day').toDate()
+  validUpdateTime = validUpdateTime > todayStart ? validUpdateTime : todayStart
   let _online = await Online.findOne({
     deviceId: data.device,
     userId: data.user,
@@ -87,8 +125,14 @@ async function handlerOnline (data) {
     }, 1)
   }
   // 初次设置时携带用户信息
-  if (data.data && data.data.startup && data.data.user) {
-    await _saveUser(data.data.user)
+  if (data.data && data.data.startup) {
+    await _saveLaunch(data.device)
+    if (data.data.user) {
+      await _saveUser(data.data.user)
+    }
+    if (data.data.device) {
+      await _saveDevice(data.device, data.data.device)
+    }
   }
 }
 
@@ -132,6 +176,7 @@ module.exports = (fastify) => {
     }
     const { event } = request.query
     const { ip } = request.req
+    // const ip = '112.80.103.116'
     const data = { ...request.query, ip }
     switch (event) {
       case '_setUser':
