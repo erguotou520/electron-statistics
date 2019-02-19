@@ -1,0 +1,30 @@
+version: "3"
+services:
+  mongo:
+    image: mongo
+    networks:
+      - one
+    volumes:
+      - mongo-data:/data/db
+  server:
+    restart: always
+    build: ./server
+    image: erguotou/electron-statistics-server
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/electron-statistics
+    ports:
+      - "3333:3333"
+    networks:
+      - one
+    depends_on:
+      - mongo
+  frontend:
+    build: ./admin
+    image: erguotou/electron-statistics-admin
+    ports:
+      - "80:80"
+networks:
+  one:
+
+volumes:
+  mongo-data:

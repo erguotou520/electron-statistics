@@ -1,6 +1,10 @@
 {
+  "name": "electron-statistics-server",
+  "version": "0.0.1",
+  "main": "index.js",
   "scripts": {
-    "server": "nodemon --watch ./ index.js"
+    "server": "nodemon --watch ./ index.js",
+    "start": "node index.js"
   },
   "dependencies": {
     "dayjs": "^1.8.5",

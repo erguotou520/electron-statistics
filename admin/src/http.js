@@ -6,7 +6,7 @@ import store from './store'
 import router from './router'
 
 const instance = axios.create({
-  baseURL: 'http://192.168.31.105:3333/api/v1',
+  baseURL: process.env.API_URL || 'http://localhost:3333/api/v1',
   paramsSerializer: params => {
     return stringify(params, {
       arrayFormat: 'indices'
