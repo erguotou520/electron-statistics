@@ -21,8 +21,8 @@ services:
   frontend:
     build: ./admin
     image: erguotou/electron-statistics-admin
-    environment:
-      - SERVER_URL=http://server:3333/
+    # environment:
+    #   - SERVER_URL=http://server:3333/
     ports:
       - "8080:80"
 networks:
