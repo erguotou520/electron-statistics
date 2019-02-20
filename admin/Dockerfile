@@ -1,7 +1,6 @@
 # build stage
 FROM node:lts-alpine as build-stage
 WORKDIR /app
-ENV API_URL="/api/v1"
 COPY package*.json ./
 RUN yarn
 COPY . .
