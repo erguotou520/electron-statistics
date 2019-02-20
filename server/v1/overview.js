@@ -69,8 +69,8 @@ module.exports = (fastify) => {
     ])
     reply.send({
       newUserCount,
-      activeUserCount: activeUsers[0].count,
-      onlineTimeCount: Math.round(10 * onlineTimes[0].total / 3600) / 10
+      activeUserCount: activeUsers[0] ? activeUsers[0].count : 0,
+      onlineTimeCount: onlineTimes[0] ? Math.round(10 * onlineTimes[0].total / 3600) / 10 : 0
     })
   })
 }
