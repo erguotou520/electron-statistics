@@ -20,7 +20,7 @@ require('./schemas')
 fastify.register(require('fastify-cors'), {})
 
 // Routes
-fastify.get('/', async () => '让你点我了么')
+fastify.get('/', async () => 'Hello server')
 fastify.register(require('./v1'), { prefix: '/api/v1' })
 
 // seed

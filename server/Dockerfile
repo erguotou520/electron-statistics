@@ -9,7 +9,7 @@ COPY . .
 FROM node:lts-alpine
 COPY --from=build-stage /app /
 ENV MONGO_URI=${MONGO_URI}
-ENV SERVER_HOST=localhost
+ENV SERVER_HOST='0.0.0.0'
 ENV SERVER_PORT=3333
 EXPOSE 3333
 CMD [ "npm", "start" ]
