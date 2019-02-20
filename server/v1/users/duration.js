@@ -90,7 +90,7 @@ module.exports = (fastify) => {
     ])
     const all = data.reduce((sum, item) => sum + item.count, 0)
     reply.send({
-      total: Math.round(totalOnlineTime[0].total * 10 / 3600) / 10,
+      total: totalOnlineTime[0] ? Math.round(totalOnlineTime[0].total * 10 / 3600) / 10 : 0,
       range: data.map(item => {
         return {
           ...item,
