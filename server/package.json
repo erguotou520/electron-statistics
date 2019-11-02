@@ -14,7 +14,7 @@
     "fastify-plugin": "^1.4.0",
     "ip2region": "^1.6.0",
     "lodash.omit": "^4.5.0",
-    "mongoose": "^5.4.7",
+    "mongoose": "^5.7.5",
     "qs": "^6.6.0"
   }
 }
